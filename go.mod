@@ -1,8 +1,8 @@
 module github.com/bitcoin-sv/testcontainers-redis-go
 
-go 1.22.6
+go 1.21
 
-toolchain go1.23.0
+toolchain go1.22.3
 
 require (
 	github.com/redis/go-redis/v9 v9.1.0
