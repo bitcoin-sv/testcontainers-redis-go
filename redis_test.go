@@ -14,6 +14,7 @@ func TestSet(t *testing.T) {
 
 	container, err := RunContainer(ctx)
 	require.NoError(t, err)
+
 	t.Cleanup(func() {
 		err := container.Terminate(ctx)
 		require.NoErrorf(t, err, "failed to terminate Redis container")
@@ -21,6 +22,7 @@ func TestSet(t *testing.T) {
 
 	host, err := container.Host(ctx)
 	require.NoErrorf(t, err, "failed to fetch Redis host")
+
 	port, err := container.ServicePort(ctx)
 	require.NoErrorf(t, err, "failed to fetch Redis port")
 

@@ -34,10 +34,12 @@ func (s redisWaitStrategy) WaitUntilReady(ctx context.Context, target wait.Strat
 	if err != nil {
 		return fmt.Errorf("failed to fetch host: %w", err)
 	}
+
 	port, err := target.MappedPort(ctx, redisServicePort)
 	if err != nil {
 		return fmt.Errorf("failed to fetch port: %w", err)
 	}
+
 	return s.pollUntilReady(ctx, host, port.Int())
 }
 
@@ -46,11 +48,13 @@ func (s redisWaitStrategy) pollUntilReady(ctx context.Context, host string, port
 		select {
 		case <-ctx.Done():
 			return fmt.Errorf("timed out while waiting for Redis to start: %w", ctx.Err())
+
 		case <-time.After(defaultPollInterval):
 			isReady, err := s.isReady(ctx, host, port)
 			if err != nil {
 				return err
 			}
+
 			if isReady {
 				return nil
 			}
@@ -68,5 +72,6 @@ func (s redisWaitStrategy) isReady(ctx context.Context, host string, port int) (
 	if err != nil {
 		return false, nil
 	}
+
 	return true, nil
 }

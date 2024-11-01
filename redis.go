@@ -23,10 +23,12 @@ func RunContainer(ctx context.Context, opts ...testcontainers.ContainerCustomize
 		ExposedPorts: []string{redisServicePort},
 		WaitingFor:   newRedisWaitStrategy(),
 	}
+
 	genericContainerRequest := testcontainers.GenericContainerRequest{
 		ContainerRequest: containerRequest,
 		Started:          true,
 	}
+
 	for _, opt := range opts {
 		if err := opt.Customize(&genericContainerRequest); err != nil {
 			return nil, fmt.Errorf("failed to apply option: %w", err)
@@ -47,6 +49,7 @@ func (c RedisContainer) ServicePort(ctx context.Context) (int, error) {
 	if err != nil {
 		return 0, err
 	}
+
 	return port.Int(), nil
 }
 
