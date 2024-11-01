@@ -9,7 +9,7 @@ import (
 
 const (
 	redisServicePort  = "6379/tcp"
-	defaultRedisImage = "redis/redis-stack-server:6.2.6-v17"
+	defaultRedisImage = "redis:7"
 )
 
 type RedisContainer struct {
